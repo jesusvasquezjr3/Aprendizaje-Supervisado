@@ -6,6 +6,8 @@
 
 Este repositorio documenta el proceso completo de un proyecto de aprendizaje supervisado, utilizando el famoso conjunto de datos del Titanic. El objetivo principal es aplicar los conceptos y metodologías fundamentales de la Inteligencia Artificial y el Machine Learning para predecir si un pasajero sobrevivió o no al desastre.
 
+> Fecha de Finalización: **23 de Septiembre del 2025**.
+
 ## 🚀 Flujo de Trabajo en Aprendizaje Supervisado
 
 El proyecto sigue un flujo de trabajo estructurado que abarca desde la preparación inicial de los datos hasta la puesta en producción de un modelo predictivo. A continuación se presenta un diagrama que ilustra este proceso, seguido de una explicación detallada de cada etapa.
