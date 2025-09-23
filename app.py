@@ -1,38 +1,35 @@
-'''
-Puesta en Producción de un Modelo de Machine Learning con Flask
-Este script crea una API RESTful usando Flask para servir un modelo de machine learning previamente entrenado
-y serializado con pickle. La API permite hacer predicciones enviando datos en formato JSON.
-'''
-
-# Importar Paquetes
 from flask import Flask, request, jsonify
 import pickle
-import numpy as np
+import pandas as pd
 
-# Cargar Modelo
-modelo = None
-
-# Cargar el modelo
-with open("archivo_estimador.pkl", 'rb') as file:
-    modelo = pickle.load(file)
-
-# Crear la Aplicación Flask
 app = Flask(__name__)
 
+# Cargar el modelo guardado
+with open('pipeline.pkl', 'rb') as archivo_modelo:
+    modelo = pickle.load(archivo_modelo)
+
+print("Tipo del objeto cargado:", type(modelo))
+try:
+    from sklearn.pipeline import Pipeline
+    print("¿Es Pipeline? ->", isinstance(modelo, Pipeline))
+except Exception:
+    pass
+
+
 @app.route('/predecir', methods=['POST'])
-def predict():
-    # obtener json
-    data = request.get_json(force=True)
-    
-    # convertir los datos a un arreglo de Numpy
-    input_data = np.array(data['input']).reshape(1, -1)
-    
-    # Hacer predicción
+def predecir():
+    # Obtener los datos de la solicitud
+    data = request.get_json()
+
+    # Crear un DataFrame de pandas a partir del JSON
+    input_data = pd.DataFrame([data])
+
+    # Hacer la predicción usando el modelo que tiene el pipeline que hará la transformación
     prediccion = modelo.predict(input_data)
-    
-    # regresar predicción en formato json
-    return jsonify({'prediccion': int(prediccion[0])})
+
+    # Devolver la predicción como JSON
+    output = {'Survived': int(prediccion[0])}
+    return jsonify(output)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
