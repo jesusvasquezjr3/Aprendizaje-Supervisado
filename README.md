@@ -12,22 +12,25 @@ El proyecto sigue un flujo de trabajo estructurado que abarca desde la preparaci
 
 ```mermaid
 graph TD;
-    A[📊 Dataset Inicial] --> B(🧹 2.1 Limpieza de Datos);
-    B --> C(📈 2.2 Análisis Exploratorio);
-    C --> D(🛠️ 2.3 Feature Engineering);
+    A[📊 Dataset Inicial] --> B(🧹 Limpieza de Datos);
+    B --> C(📈 Análisis Exploratorio);
+    C --> D(🛠️ Feature Engineering);
     D --> E(🔪 División de Datos);
+
     subgraph "Fase de Modelado"
         E --> F[🚄 Datos de Entrenamiento];
         E --> G[🧪 Datos de Prueba];
-        F --> H(🧠 2.4 Entrenamiento del Modelo);
+        F --> H(🧠 Entrenamiento del Modelo);
         H --> I{🤖 Modelo Entrenado};
         I -- Predicciones --> J(💯 Evaluación del Modelo);
         G -- Datos reales --> J;
+        J -. Métricas -> Reentrenar? .-> H;
     end
+
     subgraph "Fase de Operación"
-        I --> K(🚢 2.5 Puesta en Producción);
+        I --> K(🚢 Puesta en Producción);
     end
-    J -- Métricas de rendimiento --> H;
+
     style K fill:#cde4ff,stroke:#333,stroke-width:2px;
 ```
 
@@ -100,8 +103,8 @@ graph TD;
 1. **Clonar el repositorio:**
     
     ```bash
-    git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/TU_USUARIO/TU_REPOSITORIO.git)
-    cd TU_REPOSITORIO
+    git clone [https://github.com/jesusvasquezjr3/Aprendizaje-Supervisado](https://github.com/jesusvasquezjr3/Aprendizaje-Supervisado)
+    cd Aprendizaje-Supervisado
     ```
     
 2. **Crear un entorno virtual e instalar dependencias:**
@@ -140,6 +143,8 @@ graph TD;
     ```bash
     Invoke-RestMethod -Uri "http://127.0.0.1:5000/predecir" -Method POST -ContentType "application/json" -Body '{"input": [0,0,0,0,0,0,0]}'
     ```
+
+
 
 >[!Tip]
 > **📥 Estructura del JSON de Entrada para Predicciones**
