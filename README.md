@@ -183,3 +183,9 @@ graph TD;
 >    
 >- `Embarked`: Puerto de embarque (`C` = Cherbourg, `Q` = Queenstown, `S` = Southampton).
 
+> ### ¿Cómo hacer las modificaciones al `input`?
+> **Supongamos que quieres predecir la supervivencia de un hombre de 30 años, que viaja en 3ra clase, solo, pagó una tarifa de 8.05 y embarcó en Southampton (S).**
+> El comando `curl` se vería así:
+> ```bash
+> curl.exe -X POST http://127.0.0.1:5000/predecir -H "Content-Type: application/json" -d '{"Pclass": [3], "Sex": ["male"], "Age": [30], "SibSp": [0], "Parch": [0], "Fare": [8.05], "Embarked": ["S"]}'
+> ```
